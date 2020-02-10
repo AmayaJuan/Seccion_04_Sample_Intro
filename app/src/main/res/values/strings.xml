@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">test1</string>
+    <string name="create_data">Create data</string>
+    <string name="Remove_data">Remove data</string>
+</resources>
