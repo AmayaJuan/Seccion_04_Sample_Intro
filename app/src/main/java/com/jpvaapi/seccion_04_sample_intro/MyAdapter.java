@@ -47,7 +47,7 @@ public class MyAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(layuot, null);
             vh = new ViewHolder();
             vh.vin = convertView.findViewById(R.id.textViewVIN);
-            vh.name = convertView.findViewById(R.id.textViewColor);
+            vh.name = convertView.findViewById(R.id.textViewName);
             vh.color = convertView.findViewById(R.id.textViewColor);
             convertView.setTag(vh);
         } else
