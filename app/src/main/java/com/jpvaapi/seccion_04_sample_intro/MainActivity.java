@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //
+        //Open the database 'DBTest1' in write mode
         carsHelper = new CarsSQLiteHelper(this, "DBTest1", null, 1);
         db = carsHelper.getWritableDatabase();
 
@@ -64,11 +64,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private List<Car> getAllCars() {
-        //
+        //We select all the records in the Cars table
         Cursor cursor = db.rawQuery("select * from Cars", null);
         List<Car> list = new ArrayList<Car>();
 
         if (cursor.moveToFirst()){
+            //iterate over the results cursor,
+            //and we are filling the array that we will return later
             while (!cursor.isAfterLast()){
                 int VIN = cursor.getInt(cursor.getColumnIndex("VIN"));
                 String name = cursor.getString(cursor.getColumnIndex("name"));
@@ -82,15 +84,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void create() {
-        //
+        //If we have successfully opened the database
         if (db != null) {
-            //
+            //We create the record to insert as a ContentValues object
             ContentValues newRecord = new ContentValues();
-            //
+            //The ID is self-increasing as stated in our Cars SQLiteHelper
             newRecord.put("name", "Seat");
             newRecord.put("color", "Black");
 
-            //
+            //We insert the record in the database
             db.insert("Cars", null, newRecord);
         }
     }
@@ -100,17 +102,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void update() {
-        //
+        //delete all the elements
         cars.clear();
-        //
+        //we load all the elements
         cars.addAll(getAllCars());
-        //
+        //cool the adapter
         adapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onDestroy() {
-        //
+        //close database connection before destroying the activity
         db.close();
         super.onDestroy();
     }
